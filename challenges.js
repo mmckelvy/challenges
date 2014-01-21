@@ -16,5 +16,3 @@ var factorial = function (number) {
 console.log(factorial(4));
 console.log(factorial(8));
 
-// Sort function.
-
