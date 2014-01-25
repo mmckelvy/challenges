@@ -63,12 +63,12 @@ var checkNums = function (num1, num2) {
 // Determine the longest word in a sentence.
 var longWord = function (sentence) {
 	// Set regex for only alpha characters.
-	var regEx = /[^a-zA-Z ]/g 
+	var regEx = /[^a-zA-Z ]/g; 
 	// Remove non-alpha characters.
 	var cleanSentence = sentence.replace(regEx, "");
 	// Extract the strings.
 	var strArr = cleanSentence.split(" ");
-	// Return the longest string.
+	// Set longest string variable.
 	var bigString = "";
 	for (var i = 0; i < strArr.length; i++) {
 		// Set bigString to current string if current string > bigString.
@@ -81,9 +81,25 @@ var longWord = function (sentence) {
 };
 console.log(longWord("The people arelslsls here??#"));
 
+// Changes letter to subsequent letter in alphabet; capitalizes all vowels.
+var letterChanges = function (string) {
+	// Set a regex for only alpha characters.
+	var alphaExp = /[a-zA-Z]/;
+	// Set a regex for vowels.
+	var vowelExp = /[aeiouAEIOU]/;
+	// Create a new string.
+	var newWord = "";
+	for (var i = 0; i < string.length; i++) {
+		// Get the next character if an alpha character, else leave it the same.
+		var nextChar = alphaExp.test(string[i]) ? String.fromCharCode(string[i].charCodeAt(0) + 1) : string[i]; 
+		// Capitalize next character and add to the word if vowel, otherwise just add to the word.
+		vowelExp.test(nextChar) ? newWord += nextChar.toUpperCase() : newWord += nextChar; 
+	}
 
+	return newWord;
+};
 
-
+console.log(letterChanges("Bat!man!"));
 
 
 
