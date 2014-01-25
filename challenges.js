@@ -44,3 +44,48 @@ var alphaSort = function (str) {
 
 var testString = "stuf";
 console.log(alphaSort(testString));
+
+// Check two numbers and determine which is greater.
+var checkNums = function (num1, num2) {
+	// if num2 > num1, return "true", otherwise false.  if equal then return -1.
+	if (num2 > num1) {
+		return "true";
+	}
+	else if (num2 === num1) {
+		return -1;
+	}
+	else {
+		return "false";
+	}
+
+};
+
+// Determine the longest word in a sentence.
+var longWord = function (sentence) {
+	// Set regex for only alpha characters.
+	var regEx = /[^a-zA-Z ]/g 
+	// Remove non-alpha characters.
+	var cleanSentence = sentence.replace(regEx, "");
+	// Extract the strings.
+	var strArr = cleanSentence.split(" ");
+	// Return the longest string.
+	var bigString = "";
+	for (var i = 0; i < strArr.length; i++) {
+		// Set bigString to current string if current string > bigString.
+		if (strArr[i].length > bigString.length) {
+			bigString = strArr[i];
+		}
+	}
+
+	return bigString;
+};
+console.log(longWord("The people arelslsls here??#"));
+
+
+
+
+
+
+
+
+
