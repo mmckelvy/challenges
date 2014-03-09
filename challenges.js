@@ -101,7 +101,33 @@ var letterChanges = function (string) {
 
 console.log(letterChanges("Bat!man!"));
 
+// Capitalize the first letter of each word.
+
+var letterCap = function (str) {
+	// Set a regex to match the first letter of any word that is not already capitalized.
+	var capRegEx = /\b[a-z]/g;
+	// Test the regex
+	console.log(str.match(capRegEx));
+	// Use replace method and pass a function to handle convert the character to uppercase.
+	capString = str.replace(capRegEx, function (match) {
+		return match.toUpperCase(); 
+	});
 
 
+	return capString;
 
+};
 
+console.log(letterCap("cool story bro"));
+console.log(letterCap("231sjjd in there @"));
+
+var addArr = function (arr) {
+	// First need to get the largest number in the array.
+	var largest = Math.max.apply(null, arr);
+	console.log(largest);
+	// Now, need to figure out if any numbers in the array can add up to largest.
+
+};
+
+newArray = [1, 3, 4, 7, 8];
+addArr(newArray);
