@@ -1,3 +1,9 @@
+// Helper functions
+String.prototype.repeat = function (num) {
+    return new Array ( num + 1 ).join(this);
+};
+
+
 // Calculate the factorial of a number.
 var factorial = function (number) {
 	var factorsArr = [];
@@ -121,13 +127,60 @@ var letterCap = function (str) {
 console.log(letterCap("cool story bro"));
 console.log(letterCap("231sjjd in there @"));
 
+// New challenge
 var addArr = function (arr) {
 	// First need to get the largest number in the array.
 	var largest = Math.max.apply(null, arr);
 	console.log(largest);
-	// Now, need to figure out if any numbers in the array can add up to largest.
+	// Calculate the number of subsets in the array (the power set);
+	var powerSet = [];
+	var powerSetLength = Math.pow(2, arr.length);
+	var binArr = [];
+	// Get number of placeholders necessary to properly map the binary digits.
+	var totalDigits = arr.length;
 
+	// Set up a loop that counts from 1 to powerSet (2^n)
+	for (var i = 0; i < powerSetLength; i++) {
+		// Convert the count to binary
+		var count = i.toString(2);
+		// Get the number of leading zeros necessary (total necessary - total digits in count).
+		var leading = totalDigits - count.length;
+		// Create the necessary leading zeros.
+		var zeros = "0".repeat(leading);
+		// Add them to the count.
+		var binMap = zeros + count;
+		// console.log(binMap);
+		// Create an array to hold the subset of the power set according to the binMap.
+		var subSet = [];
+		for (var j = 0; len = binMap.length, j < len; j++) {
+			// console.log(binMap[j]);
+			if (binMap[j] === "1") {
+				subSet.push(arr[j]);	
+			}
+		}		
+		// Push to an array for mapping.
+		powerSet.push(subSet);
+	}
+	console.log(powerSet);
+	// Calculate all the sums for each subset.
+	for (var k = 0; k < powerSet.length; k++) {
+		console.log(powerSet[k]);
+		if (powerSet[k].length === 0) {
+			powerSet.splice(k, 1);
+		}
+
+		else {
+			powerSet[k] = powerSet[k].reduce (function (a, b) {
+				return a + b;
+			});
+		}
+	}
+	// console.log(powerSet);
 };
 
-newArray = [1, 3, 4, 7, 8];
+
+
+var testerString = "a";
+newArray = [1, 2, 3];
+// Should be 8 total numbers, 1 - 8 in binary.  Should have 8 digits in each.
 addArr(newArray);
