@@ -127,12 +127,15 @@ var letterCap = function (str) {
 console.log(letterCap("cool story bro"));
 console.log(letterCap("231sjjd in there @"));
 
-// New challenge
+// Find the largest item in an array.  Then determine if any combination of other elements in the array add up to the largest number.
 var addArr = function (arr) {
 	// First need to get the largest number in the array.
 	var largest = Math.max.apply(null, arr);
-	console.log(largest);
-	// Calculate the number of subsets in the array (the power set);
+	// Get index of the largest value.
+	var largestIndex = arr.indexOf(largest);
+	// Remove the largest number from the array.
+	arr.splice(largestIndex, 1);
+	// Calculate the number of subsets in the array (the power set).
 	var powerSet = [];
 	var powerSetLength = Math.pow(2, arr.length);
 	var binArr = [];
@@ -161,12 +164,10 @@ var addArr = function (arr) {
 		// Push to an array for mapping.
 		powerSet.push(subSet);
 	}
-	console.log(powerSet);
 	// Calculate all the sums for each subset.
 	for (var k = 0; k < powerSet.length; k++) {
-		console.log(powerSet[k]);
 		if (powerSet[k].length === 0) {
-			powerSet.splice(k, 1);
+			powerSet[k] = 0;
 		}
 
 		else {
@@ -175,12 +176,25 @@ var addArr = function (arr) {
 			});
 		}
 	}
-	// console.log(powerSet);
+
+	// Check to see if largest number is in the array.
+	if (powerSet.indexOf(largest) === -1) {
+		return false;
+	}
+
+	else {
+		return true;
+	}
 };
 
 
 
 var testerString = "a";
-newArray = [1, 2, 3];
-// Should be 8 total numbers, 1 - 8 in binary.  Should have 8 digits in each.
-addArr(newArray);
+trueArray = [1, 2, 3];
+falseArray = [2, 3, 4];
+
+// Should return true.
+console.log(addArr(trueArray));
+
+// Should return false.
+console.log(addArr(falseArray));
