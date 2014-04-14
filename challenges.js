@@ -187,14 +187,87 @@ var addArr = function (arr) {
 	}
 };
 
+/* Determine if mode equals the mean; return 1 if true, 0 if false */
+
+// Find mode of the array
+
+var mode = function (arr) {
+	// Loop through array, create a new key if the number does not exist, else push the number to an array in for the key that matches the number.
+	var modeObj = {};
+
+	for (var i = 0, len = arr.length; i < len; i++) {
+		// Create a new key for each number if the key does not exist.
+		if ( !(arr[i] in modeObj) ) {
+			modeObj[arr[i]] = []; // Instantiate an array.
+			modeObj[arr[i]].push(arr[i]); // Push the current number to the array.
+		}
+
+		// Else push items to the proper array.
+		else {
+			modeObj[arr[i]].push(arr[i]);
+		}
+	}
+
+	// Count number of items in each key.
+	var modeResult = 0;
+	for (var key in modeObj) {
+		if (modeObj[key].length > modeResult) {
+			modeResult = +key;
+		}
+
+	}
+
+	return modeResult;
+};
+
+/* Calculate the mean of the array */
+
+var average = function (arr) {
+	// Sum all items in the array.
+	var sum = arr.reduce(function (a, b) {
+		return a + b;
+	});
+
+	var count = arr.length;
+	return sum / count;
+};
+
+/* Check to see if mean equals mode */
+
+var meanMode = function (arr) {
+	var modeCalc = mode(arr);
+	var meanCalc = average(arr);
+	var result = meanCalc === modeCalc ? 1 : 0;
+
+	return result;
+};
 
 
-var testerString = "a";
-trueArray = [1, 2, 3];
-falseArray = [2, 3, 4];
+console.log(meanMode([1, 3, 3, 2])); // Should return 0.
+console.log(meanMode([5, 5, 5, 10, 0])); // Should return 1.
 
-// Should return true.
-console.log(addArr(trueArray));
+var vowelCounter = function (str) {
+	 // Create an object to hold vowel keys.
+	var vowelObj = {
+		a: 0,
+		e: 0,
+		i: 0,
+		o: 0,
+		u: 0
+	};
 
-// Should return false.
-console.log(addArr(falseArray));
+	var vowelCount = 0;
+
+	for (var i = 0, len = str.length; i < len; i++) {
+		if (str[i] in vowelObj) {
+			vowelCount++;
+		}
+	}
+	return vowelCount;
+
+};
+
+console.log(vowelCounter('stuff')); // Should return 1.
+console.log(vowelCounter('agony')); // Should return 2.
+console.log(vowelCounter('aaeeiib')); // Should return 6.
+
