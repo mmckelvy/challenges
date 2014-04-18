@@ -246,6 +246,7 @@ var meanMode = function (arr) {
 console.log(meanMode([1, 3, 3, 2])); // Should return 0.
 console.log(meanMode([5, 5, 5, 10, 0])); // Should return 1.
 
+/* Vowel count */
 var vowelCounter = function (str) {
 	 // Create an object to hold vowel keys.
 	var vowelObj = {
@@ -267,7 +268,48 @@ var vowelCounter = function (str) {
 
 };
 
-console.log(vowelCounter('stuff')); // Should return 1.
-console.log(vowelCounter('agony')); // Should return 2.
-console.log(vowelCounter('aaeeiib')); // Should return 6.
+/* Determine if an array is an arithmetic or geometric sequence. */
+
+var arithGeo = function (array) {
+
+	var sum = array.reduce(function (a, b) { return a + b }); // Get sum of the array.
+	/* Get the arithmetic sum of the array. */
+	var nTerms = array.length;
+	var firstTerm = array[0];
+	var lastTerm = array[array.length - 1];
+	var arithSum = nTerms * (firstTerm + lastTerm) / 2;
+
+	/* Exit the function and return arithmetic if series is arithmetic. */
+	if (sum === arithSum) {
+		return 'Arithmetic';
+	}
+
+	/* Check for geometric sequence. */
+	for (var i = 0, len = array.length - 1; i < len; i++) {
+		var ratio = array[1] / array[0]; // Get the ratio.
+		if ( array[i + 1] / array[i] !== ratio) {
+			return -1;
+		}
+	}
+
+	return 'Geometric';
+};
+
+
+var geoArrayTest = [2, 4, 8, 16, 32];
+var arithArrayTest = [2, 4, 6, 8, 10];
+var negArrayTest = [1, 7, 8, 3, 2];
+
+console.log(arithGeo(geoArrayTest));
+console.log(arithGeo(arithArrayTest));
+console.log(arithGeo(negArrayTest));
+
+
+
+
+
+
+
+
+
 
