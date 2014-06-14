@@ -304,12 +304,82 @@ console.log(arithGeo(geoArrayTest));
 console.log(arithGeo(arithArrayTest));
 console.log(arithGeo(negArrayTest));
 
+/* numberSearch function */
+
+// First, find all the numbers in a given string.
+var getNumbers = function (string) {
+	var numRegex = /[0-9]+/g // Need a regex to get all the numbers.
+	var numArray = string.match(numRegex);
+
+	var sum = numArray.reduce( function (a, b) {
+		return +a + +b; // Coerce to numbers.
+	});
+
+	return sum;
+};
+
+var testString = 'T1wo Ho33uses';
+console.log(getNumbers(testString));
+
+var regexTesting = function(string) {
+	var jadeRegex = /\bjade\b/;
+	
+	return jadeRegex.test(string);
+};
 
 
+function letterCount(string) {
+	var stringObjArray = []; // Create an array to hold the string objects.
+	
+	/* Create an array of the words. */
+	var wordRegex = /\b\w+\b/g;
+	var wordsArray = string.match(wordRegex);
+
+	/* Check each word in the array create object attrs for sorting. /*/
+	for (var i = 0, len = wordsArray.length; i < len; i++) {
+		var stringObj = {}; // Create an object to hold the sorting key / vals.
+		var repeatsArray = letterRepeat(wordsArray[i]);
+		
+		stringObj.index = i;
+		stringObj.word = wordsArray[i];
+
+		var repeats = letterRepeat(stringObj.word);
+		stringObj.repeatCount = Math.max.apply(null, repeats);
+
+		stringObjArray.push(stringObj);
+	}
+
+	/* Sort by repeat count, then index. */
+	stringObjArray.sort( function (a, b) {
+		return b.repeatCount - a.repeatCount || a.index - b.index;
+	});
+
+	return stringObjArray[0].repeatCount === 1 ? -1 : stringObjArray[0].word;
+
+};
+
+function letterRepeat(string) {
+	var repeatArray = [];
+	
+	for (var i = 0; i < string.length; i++) {
+		var regEx = new RegExp(string[i], 'g');
+		repeatArray.push( string.match(regEx).length );
+	}
+
+	return repeatArray;
+};
 
 
+console.log(regexTesting('jade'));
+console.log(regexTesting('jaer'));
+console.log(regexTesting('jadesdsd'));
 
+var letterCountStr1 = 'aaa bats ddd';
+var letterCountStr2 = 'babes sss syss';
+var letterCountStr3 = 'abcde';
 
+console.log( letterCount(letterCountStr1) ); // Should return 'aaa'.
+console.log( letterCount(letterCountStr2) ); // Should return 'sss'.
+console.log( letterCount(letterCountStr3) ); // Should return -1.
 
-
-
+console.log( letterRepeat('aan') ); // Should return [2, 2, 1].
